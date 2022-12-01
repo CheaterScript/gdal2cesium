@@ -664,17 +664,17 @@ gdal2tiles temp.vrt""" % _inumpyut )
         for tz in range(self.tminz,self.tmaxz+1):
             res = self.zoom_resolutions[tz][0]  # I check only with resx, because resy will be positively correlated
             if res != tmp_res:
-		if i>0:
-			self.vrts[vrt_file][1] = tz-1
-                tmp_res = res
-                resx = self.zoom_resolutions[tz][0]
-                resy = self.zoom_resolutions[tz][1]
-                self.make_vrt(resx,resy,i)
-                vrt_file = "cesium_%s.vrt" % i
-                self.vrts[vrt_file] = [tz,None]
-                i += 1
-            if tz == self.tmaxz:
-                self.vrts[vrt_file][1] = tz
+                if i>0:
+                    self.vrts[vrt_file][1] = tz-1
+                    tmp_res = res
+                    resx = self.zoom_resolutions[tz][0]
+                    resy = self.zoom_resolutions[tz][1]
+                    self.make_vrt(resx,resy,i)
+                    vrt_file = "cesium_%s.vrt" % i
+                    self.vrts[vrt_file] = [tz,None]
+                    i += 1
+                    if tz == self.tmaxz:
+                        self.vrts[vrt_file][1] = tz
         
         self.ti_cum = 0
         if self.options.createtileindexshp and self.tilelayer is None:
